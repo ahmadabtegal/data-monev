@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d72">
+  <meta name="description" content="Dashboard publik hasil monitoring perizinan dan pengawasan usaha DPMPTSP Kota Tegal.">
+  <title>Monitoring Perizinan | DPMPTSP Kota Tegal</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#123d72;--blue:#1769aa;--teal:#0c9488;--bg:#f3f7fc;--ink:#162b45;--muted:#6d7d91;--line:#e4ebf3;--white:#fff;--shadow:0 10px 30px #183c6610}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink)}button,input,select{font:inherit}
+    .topline{height:5px;background:linear-gradient(90deg,#153f75 0 45%,#e3b52c 45% 50%,#078e83 50% 100%)}
+    .wrap{max-width:1400px;margin:auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;background:white;padding:20px 24px;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+    .brand{display:flex;align-items:center;gap:16px;min-width:0}.logos{display:flex;align-items:center;gap:12px}.logos img{width:64px;height:64px;object-fit:contain}.logos .dpm{width:125px}
+    h1{font-size:clamp(18px,2vw,25px);margin:0 0 6px;letter-spacing:-.5px}.sub{color:var(--muted);font-size:13px}.headright{text-align:right;color:var(--muted);font-size:12px;white-space:nowrap}
+    .hero{margin:22px 0 18px;background:linear-gradient(115deg,#123d72,#1769aa);color:white;border-radius:20px;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:18px;overflow:hidden;position:relative}
+    .hero:after{content:"";position:absolute;width:260px;height:260px;border:40px solid #ffffff0c;border-radius:50%;right:8%;top:-145px}.hero h2{font-size:22px;margin:0 0 8px}.hero p{margin:0;color:#d9e9fb;font-size:13px;line-height:1.7}.live{z-index:1;background:#ffffff18;border:1px solid #ffffff36;border-radius:12px;padding:11px 14px;font-size:12px;white-space:nowrap}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.stat{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow)}.statlabel{font-size:12px;color:var(--muted);font-weight:600}.statvalue{font-size:29px;font-weight:800;letter-spacing:-1px;margin:10px 0 4px}.statnote{font-size:11px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--blue)}
+    .panel{background:white;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.panelhead{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panelhead h3{margin:0;font-size:16px}.count{font-size:12px;color:var(--muted)}
+    .filters{padding:16px 22px;display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(150px,1fr));gap:10px;border-bottom:1px solid var(--line)}.filters input,.filters select{width:100%;min-height:42px;border:1px solid #dce5ef;border-radius:10px;background:#fff;padding:10px 12px;color:var(--ink);outline-color:#7ab3e8;font-size:12px}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:20px}.business{border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .15s,box-shadow .15s}.business:hover{transform:translateY(-2px);box-shadow:0 12px 24px #183c6612}.photo{height:190px;background:#e9f0f7;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo .no-photo{height:100%;display:flex;align-items:center;justify-content:center;color:#7d91a8;font-size:13px}.photo-label{position:absolute;left:12px;top:12px;background:#102d4bd9;color:white;border-radius:7px;padding:6px 9px;font-size:10px}
+    .business-body{padding:16px;display:flex;flex-direction:column;gap:10px;flex:1}.business h4{margin:0;font-size:15px;line-height:1.45}.field{display:flex;gap:8px;color:var(--muted);font-size:12px;line-height:1.55}.field svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}.status{display:inline-flex;align-items:center;width:fit-content;max-width:100%;padding:6px 9px;border-radius:7px;font-size:10px;line-height:1.4;font-weight:800;background:#edf3f9;color:#395571}.status.red{background:#fff0ef;color:#b33b35}.status.yellow{background:#fff6df;color:#946300}.status.green{background:#e6f7ee;color:#16754b}.status.blue{background:#e8f2ff;color:#205fa8}
+    .note{background:#f7f9fc;border-radius:9px;padding:10px;font-size:12px;color:#53677e;line-height:1.6;white-space:pre-wrap}.actions{display:flex;gap:8px;margin-top:auto;padding-top:3px}.btn{border:1px solid #d9e4ef;border-radius:9px;padding:9px 11px;background:white;color:var(--navy);text-decoration:none;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}.btn.primary{background:var(--navy);color:white;border-color:var(--navy)}.btn:hover{filter:brightness(.97)}.empty{padding:48px 20px;text-align:center;color:var(--muted);font-size:13px;grid-column:1/-1}.error{margin:14px 20px;padding:13px;border-radius:10px;background:#fff2f0;color:#a3342b;font-size:12px;display:none}.loading{padding:50px;text-align:center;color:var(--muted);grid-column:1/-1}.footer{padding:20px 4px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .mapbox{margin:0 20px 20px;border:1px solid var(--line);border-radius:13px;padding:14px;background:#f8fbff;display:flex;justify-content:space-between;align-items:center;gap:12px}.mapbox strong{font-size:13px}.mapbox p{font-size:11px;color:var(--muted);margin:5px 0 0}
+    @media(max-width:1000px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:620px){.wrap{padding:12px}.brand{align-items:flex-start}.logos{gap:6px}.logos img{width:45px;height:48px}.logos .dpm{width:78px}.brand{gap:9px}header{padding:14px;border-radius:15px}.headright{display:none}.hero{padding:20px;align-items:flex-start;flex-direction:column}.hero h2{font-size:19px}.stats{gap:9px}.stat{padding:13px}.statvalue{font-size:24px}.statlabel{font-size:11px}.filters{grid-template-columns:1fr;padding:13px}.cards{grid-template-columns:1fr;padding:13px}.photo{height:210px}.panelhead{padding:16px}.mapbox{margin:0 13px 13px;align-items:flex-start;flex-direction:column}.footer{padding:16px 3px}}
+  </style>
+</head>
+<body>
+<div class="topline"></div>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="logos">
+        <img src="assets/logo-kota-tegal.png" alt="Logo Kota Tegal">
+        <img class="dpm" src="assets/logo-dpmptsp.png" alt="Logo DPMPTSP Kota Tegal">
+      </div>
+      <div><h1>Monitoring Perizinan</h1><div class="sub">DPMPTSP Kota Tegal · Pengawasan dan pembinaan usaha</div></div>
+    </div>
+    <div class="headright"><div>PORTAL INFORMASI PUBLIK</div><div id="updated" style="margin-top:6px">Memuat pembaruan…</div></div>
+  </header>
+  <section class="hero">
+    <div><h2>Data Monitoring Usaha</h2><p>Informasi hasil pemantauan perizinan usaha di wilayah Kota Tegal.<br>Gunakan pencarian dan filter untuk menemukan data yang diperlukan.</p></div>
+    <div class="live">● <span id="liveText">Menghubungkan ke sumber data</span></div>
+  </section>
+  <section class="stats" aria-label="Ringkasan monitoring">
+    <div class="stat"><div class="statlabel"><span class="dot"></span>Total usaha dimonitor</div><div class="statvalue" id="total">—</div><div class="statnote">Seluruh data yang ditampilkan</div></div>
+    <div class="stat"><div class="statlabel"><span class="dot" style="background:#d9534f"></span>Belum mengajukan</div><div class="statvalue" id="belum">—</div><div class="statnote">Perlu tindak lanjut perizinan</div></div>
+    <div class="stat"><div class="statlabel"><span class="dot" style="background:#d8a11d"></span>Dalam proses</div><div class="statvalue" id="proses">—</div><div class="statnote">Pengajuan/perizinan sedang diproses</div></div>
+    <div class="stat"><div class="statlabel"><span class="dot" style="background:#15966b"></span>Sudah memiliki izin</div><div class="statvalue" id="izin">—</div><div class="statnote">Memiliki perizinan sesuai data monitoring</div></div>
+  </section>
+  <section class="panel">
+    <div class="panelhead"><h3>Daftar Hasil Monitoring</h3><span class="count" id="count">Memuat data…</span></div>
+    <div class="filters">
+      <input id="search" type="search" placeholder="Cari nama, bidang usaha, alamat…" aria-label="Cari data">
+      <select id="kecamatan"><option value="">Semua kecamatan</option></select>
+      <select id="kelurahan"><option value="">Semua kelurahan</option></select>
+      <select id="status"><option value="">Semua status perizinan</option></select>
+    </div>
+    <div id="error" class="error"></div>
+    <div id="cards" class="cards"><div class="loading">Mengambil data monitoring…</div></div>
+    <div class="mapbox"><div><strong>Jelajahi lokasi usaha</strong><p>Peta dibuka melalui Google Maps. Lokasi memakai koordinat GPS jika tersedia, atau pencarian berdasarkan alamat.</p></div><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kota%20Tegal">Buka Google Maps ↗</a></div>
+  </section>
+  <footer class="footer"><span>© DPMPTSP Kota Tegal · Monitoring Perizinan</span><span>Data ditampilkan sesuai informasi yang tersedia pada sumber monitoring.</span></footer>
+</div>
+<script>
+/* Tempel URL deployment Web App Google Apps Script di bawah ini. */
+const API_URL = "https://script.google.com/macros/s/AKfycbynjCswyGzCUTU92xIG88WO1SPW2_TSQzgFO5Jup1VwT-kkYtqfjlBH712SCe0Zm42Y/exec";
+let allData = [];
+const $ = id => document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function statusClass(s){s=(s||"").toLowerCase();if(s.includes("belum"))return"red";if(s.includes("proses")||s.includes("pra izin")||s.includes("mengajukan"))return"yellow";if(s.includes("sudah")||s.includes("memiliki"))return"green";return"blue";}
+function drivePhoto(url){if(!url)return"";let m=String(url).match(/(?:id=|\/d\/)([a-zA-Z0-9_-]+)/);return m?"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1000":url;}
+function mapsUrl(d){if(Number.isFinite(Number(d.latitude))&&Number.isFinite(Number(d.longitude))&&d.latitude!==""&&d.longitude!=="")return"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(d.latitude+","+d.longitude);return"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([d.lokasi,d.kelurahan,d.kecamatan,"Kota Tegal"].filter(Boolean).join(", "));}
+function fmtDate(v){if(!v)return"—";let d=new Date(v);return Number.isNaN(d.getTime())?esc(v):new Intl.DateTimeFormat("id-ID",{day:"2-digit",month:"long",year:"numeric"}).format(d);}
+function fillFilter(id,values,label){const el=$(id),old=el.value;el.innerHTML='<option value="">'+label+'</option>'+[...new Set(values.filter(Boolean))].sort((a,b)=>a.localeCompare(b,'id')).map(v=>'<option value="'+esc(v)+'">'+esc(v)+'</option>').join('');el.value=old;}
+function updateStats(data){$('total').textContent=data.length;$('belum').textContent=data.filter(d=>(d.status||"").toLowerCase().includes("belum")).length;$('proses').textContent=data.filter(d=>(d.status||"").toLowerCase().includes("proses")||(d.status||"").toLowerCase().includes("pra izin")).length;$('izin').textContent=data.filter(d=>{let s=(d.status||"").toLowerCase();return s.includes("sudah")||s.includes("memiliki");}).length;}
+function render(){const q=$('search').value.trim().toLowerCase(),k=$('kecamatan').value,kel=$('kelurahan').value,s=$('status').value;const data=allData.filter(d=>[d.nama,d.bidangUsaha,d.lokasi,d.kelurahan,d.kecamatan,d.status,d.catatan].join(" ").toLowerCase().includes(q)&&(!k||d.kecamatan===k)&&(!kel||d.kelurahan===kel)&&(!s||d.status===s));$('count').textContent=data.length+' dari '+allData.length+' usaha';const cards=$('cards');if(!data.length){cards.innerHTML='<div class="empty">Tidak ada data yang sesuai dengan pencarian atau filter.</div>';return;}
+cards.innerHTML=data.map(d=>{const photo=drivePhoto(d.foto);return `<article class="business"><div class="photo">${photo?`<img loading="lazy" src="${esc(photo)}" alt="Dokumentasi ${esc(d.nama)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:''}<div class="no-photo" style="${photo?'display:none':''}">Foto dokumentasi tidak tersedia</div><span class="photo-label">DOKUMENTASI MONITORING</span></div><div class="business-body"><h4>${esc(d.nama||'Nama usaha tidak tersedia')}</h4><div class="field">▦ <span>${esc(d.bidangUsaha||'Bidang usaha belum diisi')}</span></div><div><span class="status ${statusClass(d.status)}">${esc(d.status||'Status belum diisi')}</span></div><div class="field">⌖ <span>${esc(d.lokasi||'Alamat belum tersedia')}${d.kelurahan?' · Kel. '+esc(d.kelurahan):''}${d.kecamatan?' · Kec. '+esc(d.kecamatan):''}</span></div><div class="field">◷ <span>Monitoring: ${fmtDate(d.tanggalMonitoring)}</span></div>${d.catatan?`<div class="note">${esc(d.catatan)}</div>`:''}<div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="${esc(mapsUrl(d))}">⌖ Lihat lokasi</a>${photo?`<a class="btn" target="_blank" rel="noopener" href="${esc(d.foto)}">▧ Buka foto</a>`:''}</div></div></article>`}).join('');}
+function loadData(){if(!API_URL.startsWith('https://script.google.com/')){$('error').style.display='block';$('error').textContent='Konfigurasi belum selesai. Isi API_URL dengan URL Web App Google Apps Script pada file index.html.';$('cards').innerHTML='<div class="empty">Website siap dikonfigurasi. Masukkan URL API terlebih dahulu.</div>';$('liveText').textContent='Menunggu konfigurasi';return;}
+ const callback='monitoringCallback';window[callback]=payload=>{try{if(!payload||payload.ok!==true)throw new Error(payload&&payload.error||'Respons API tidak valid');allData=Array.isArray(payload.data)?payload.data:[];updateStats(allData);fillFilter('kecamatan',allData.map(d=>d.kecamatan),'Semua kecamatan');fillFilter('kelurahan',allData.map(d=>d.kelurahan),'Semua kelurahan');fillFilter('status',allData.map(d=>d.status),'Semua status perizinan');$('updated').textContent='Diperbarui '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});$('liveText').textContent='Data berhasil dimuat';$('error').style.display='none';render();}catch(e){showError(e.message);}finally{const old=document.getElementById('api-script');if(old)old.remove();delete window[callback];}};
+ const old=document.getElementById('api-script');if(old)old.remove();const script=document.createElement('script');script.id='api-script';script.src=API_URL+(API_URL.includes('?')?'&':'?')+'action=data&callback='+callback+'&t='+Date.now();script.onerror=()=>showError('Data gagal dimuat. Periksa URL deployment dan izin akses Web App Apps Script.');document.body.appendChild(script);
+}
+function showError(msg){$('error').style.display='block';$('error').textContent=msg;$('cards').innerHTML='<div class="empty">Data belum dapat dimuat. Silakan coba muat ulang beberapa saat lagi.</div>';$('liveText').textContent='Koneksi bermasalah';}
+['search','kecamatan','kelurahan','status'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
+loadData();setInterval(loadData,120000);
+</script>
+</body>
+</html>
